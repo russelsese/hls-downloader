@@ -5,11 +5,75 @@ Download HTTP Live Streaming (HLS) videos and save them as MP4 files, with live 
 ## Requirements
 
 - Python 3.10+
-- [ffmpeg](https://ffmpeg.org/) (includes `ffprobe`)
+- ffmpeg 4.0+ with `ffprobe` (bundled with ffmpeg)
+
+No third-party Python packages are needed — see [requirements.txt](requirements.txt).
+
+### Installing ffmpeg
+
+#### macOS
+
+Using [Homebrew](https://brew.sh):
 
 ```bash
-# macOS
 brew install ffmpeg
+```
+
+Verify:
+
+```bash
+ffmpeg -version
+```
+
+#### Linux (Ubuntu / Debian)
+
+```bash
+sudo apt update && sudo apt install -y ffmpeg
+```
+
+#### Linux (Fedora / RHEL)
+
+```bash
+sudo dnf install ffmpeg
+```
+
+> If `ffmpeg` is not found on Fedora, enable the RPM Fusion repo first:
+> ```bash
+> sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+> sudo dnf install ffmpeg
+> ```
+
+#### Linux (Arch)
+
+```bash
+sudo pacman -S ffmpeg
+```
+
+#### Windows
+
+**Option 1 — winget (Windows 11 / Windows 10 with App Installer):**
+
+```powershell
+winget install --id Gyan.FFmpeg
+```
+
+**Option 2 — Chocolatey:**
+
+```powershell
+choco install ffmpeg
+```
+
+**Option 3 — manual:**
+
+1. Download a build from <https://www.gyan.dev/ffmpeg/builds/> (choose `ffmpeg-release-essentials.zip`)
+2. Extract to a folder, e.g. `C:\ffmpeg`
+3. Add `C:\ffmpeg\bin` to your system `PATH`:
+   - Search **Edit the system environment variables** → **Environment Variables**
+   - Under **System variables**, select `Path` → **Edit** → **New** → paste `C:\ffmpeg\bin`
+4. Open a new terminal and verify:
+
+```powershell
+ffmpeg -version
 ```
 
 ## Usage
