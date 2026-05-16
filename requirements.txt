@@ -1,0 +1,7 @@
+# No third-party Python packages required.
+# All dependencies (argparse, subprocess, json, shutil, etc.) are Python stdlib.
+#
+# System requirement: ffmpeg >= 4.0 (must be available in PATH)
+# See README.md for installation instructions per platform.
+#
+# Python >= 3.10 required (uses `X | Y` union type hints and `str | None` syntax).
