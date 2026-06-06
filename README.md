@@ -2,6 +2,13 @@
 
 Download HTTP Live Streaming (HLS) videos and save them as MP4 files, with live progress, duration, and ETA display.
 
+Two scripts are available:
+
+| Script | Description |
+|---|---|
+| `hls_download.py` | Standard downloader — direct connection |
+| `hls-download-with-tor.py` | Tor variant — routes traffic through the Tor network |
+
 ## Requirements
 
 - Python 3.10+
@@ -78,13 +85,15 @@ ffmpeg -version
 
 ## Usage
 
+### Standard (`hls_download.py`)
+
 ```bash
 python3 hls_download.py [url] [output]
 ```
 
-Both arguments are optional — the script will prompt for any that are missing.
+Both positional arguments are optional — the script will prompt for any that are missing.
 
-### Examples
+#### Examples
 
 ```bash
 # Pass both arguments directly
@@ -100,7 +109,42 @@ python3 hls_download.py
 python3 hls_download.py "https://example.com/stream.m3u8"
 ```
 
-### Output
+### Tor variant (`hls-download-with-tor.py`)
+
+Routes all traffic through the Tor network. Requires `tor` and `torsocks` (macOS).
+
+#### Installing Tor (macOS only)
+
+```bash
+brew install tor torsocks
+brew services start tor   # starts the Tor daemon (runs in background)
+```
+
+Verify Tor is running:
+
+```bash
+brew services list | grep tor
+```
+
+#### Usage
+
+```bash
+python3 hls-download-with-tor.py [url] [output]
+```
+
+The script verifies the Tor connection before downloading and prints the exit node IP.
+
+#### Examples
+
+```bash
+# Pass both arguments directly
+python3 hls-download-with-tor.py "https://example.com/stream.m3u8" my_video.mp4
+
+# Interactive mode
+python3 hls-download-with-tor.py
+```
+
+## Output
 
 ```
 Fetching stream info…
