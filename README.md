@@ -7,7 +7,7 @@ Two scripts are available:
 | Script | Description |
 |---|---|
 | `hls_download.py` | Standard downloader — direct connection |
-| `hls-download-with-tor.py` | Tor variant — routes traffic through the Tor network |
+| `tor_hls_download.py` | Tor variant — routes traffic through the Tor network |
 
 ## Requirements
 
@@ -109,7 +109,7 @@ python3 hls_download.py
 python3 hls_download.py "https://example.com/stream.m3u8"
 ```
 
-### Tor variant (`hls-download-with-tor.py`)
+### Tor variant (`tor_hls_download.py`)
 
 Routes all traffic through the Tor network. Requires `tor` and `torsocks` (macOS).
 
@@ -129,7 +129,7 @@ brew services list | grep tor
 #### Usage
 
 ```bash
-python3 hls-download-with-tor.py [url] [output]
+python3 tor_hls_download.py [url] [output]
 ```
 
 The script verifies the Tor connection before downloading and prints the exit node IP.
@@ -138,10 +138,10 @@ The script verifies the Tor connection before downloading and prints the exit no
 
 ```bash
 # Pass both arguments directly
-python3 hls-download-with-tor.py "https://example.com/stream.m3u8" my_video.mp4
+python3 tor_hls_download.py "https://example.com/stream.m3u8" my_video.mp4
 
 # Interactive mode
-python3 hls-download-with-tor.py
+python3 tor_hls_download.py
 ```
 
 ## Output
