@@ -7,9 +7,10 @@ import json
 import time
 import shutil
 import socket
+from typing import Optional
 
 
-def prompt_if_missing(value: str | None, prompt: str) -> str:
+def prompt_if_missing(value: Optional[str], prompt: str) -> str:
     if value:
         return value
     val = input(prompt).strip()
@@ -25,7 +26,7 @@ def ensure_mp4_extension(filename: str) -> str:
     return filename
 
 
-def get_duration(url: str) -> float | None:
+def get_duration(url: str) -> Optional[float]:
     cmd = [
         "ffprobe",
         "-v", "quiet",
@@ -44,7 +45,7 @@ def get_duration(url: str) -> float | None:
     return None
 
 
-def fmt_duration(seconds: float | None) -> str:
+def fmt_duration(seconds: Optional[float]) -> str:
     if seconds is None or seconds < 0:
         return "--:--"
     h = int(seconds // 3600)
@@ -63,7 +64,7 @@ def fmt_size(b: int) -> str:
     return f"{b / 1024 ** 3:.2f} GB"
 
 
-def parse_speed(speed_str: str) -> float | None:
+def parse_speed(speed_str: str) -> Optional[float]:
     """Parse ffmpeg speed string like '2.5x' into a float multiplier."""
     try:
         return float(speed_str.rstrip("x"))
@@ -107,7 +108,7 @@ def check_tor() -> None:
 
 def render_progress(
     current: float,
-    total: float | None,
+    total: Optional[float],
     speed_str: str,
     size: int,
     elapsed: float,
