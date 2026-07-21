@@ -77,8 +77,22 @@ def check_tor() -> None:
         with socket.create_connection(("127.0.0.1", 9050), timeout=5):
             pass
     except OSError:
-        print("Error: Tor daemon is not running. Start it with: brew services start tor", file=sys.stderr)
-        sys.exit(1)
+        print("Tor daemon not running — starting it now…")
+        result = subprocess.run(["brew", "services", "start", "tor"], capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"Error: Failed to start Tor: {result.stderr.strip()}", file=sys.stderr)
+            sys.exit(1)
+        print("Waiting for Tor to bootstrap…")
+        for _ in range(15):
+            time.sleep(2)
+            try:
+                with socket.create_connection(("127.0.0.1", 9050), timeout=2):
+                    break
+            except OSError:
+                pass
+        else:
+            print("Error: Tor did not start in time.", file=sys.stderr)
+            sys.exit(1)
 
     if not shutil.which("torsocks"):
         print("Error: torsocks not found. Install with: brew install torsocks", file=sys.stderr)
