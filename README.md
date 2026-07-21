@@ -126,6 +126,12 @@ Verify Tor is running:
 brew services list | grep tor
 ```
 
+To route browser traffic through Tor, launch Chrome with the SOCKS5 proxy:
+
+```bash
+open -a "Google Chrome" --args --proxy-server="socks5://127.0.0.1:9050"
+```
+
 #### Usage
 
 ```bash
