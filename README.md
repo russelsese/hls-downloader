@@ -111,7 +111,7 @@ python3 hls_download.py "https://example.com/stream.m3u8"
 
 ### Tor variant (`tor_hls_download.py`)
 
-Routes all traffic through the Tor network. Requires `tor` and `torsocks` (macOS).
+Routes all traffic through the Tor network. Tor is always active — there is no opt-in flag. Requires `tor` and `torsocks` (macOS).
 
 #### Installing Tor (macOS only)
 
@@ -132,7 +132,7 @@ brew services list | grep tor
 python3 tor_hls_download.py [url] [output]
 ```
 
-The script verifies the Tor connection before downloading and prints the exit node IP.
+The script automatically verifies the Tor connection before downloading and prints the exit node IP.
 
 #### Examples
 

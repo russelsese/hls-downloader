@@ -217,20 +217,18 @@ def download_hls(url: str, output: str, use_tor: bool = False) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Download an HLS stream and save it as MP4 with live progress."
+        description="Download an HLS stream through Tor and save it as MP4 with live progress."
     )
     parser.add_argument("url", nargs="?", help="HLS playlist URL (.m3u8)")
     parser.add_argument("output", nargs="?", help="Output filename (e.g. video.mp4)")
-    parser.add_argument("--tor", action="store_true", help="Route download through Tor (requires tor + torsocks)")
     args = parser.parse_args()
 
-    if args.tor:
-        check_tor()
+    check_tor()
 
     url = prompt_if_missing(args.url, "HLS URL (.m3u8): ")
     output = prompt_if_missing(args.output, "Output filename: ")
 
-    download_hls(url, output, use_tor=args.tor)
+    download_hls(url, output, use_tor=True)
 
 
 if __name__ == "__main__":
